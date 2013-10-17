@@ -15,6 +15,7 @@ public class MainManagerImpl implements MainManager {
 	SpeechRecognizer sprec;
 	String motion;
 	DialogueManager dialog = new DialogueManagerImpl();
+	HelloAnimation hello = new HelloAnimation();
 	
 	MainManagerImpl() {
 		try {
@@ -27,6 +28,7 @@ public class MainManagerImpl implements MainManager {
 	
 	public void start() {
 		sprec.start();
+		hello.start();
 	}
 
 	public void speechDetected(Document doc) {
@@ -35,13 +37,12 @@ public class MainManagerImpl implements MainManager {
 		if (doc.getDocumentElement().getTagName().equals("RECOGOUT")) {
 			RecogOut recogout = new RecogOut(doc);
           System.out.println(recogout.shypo[0].whypo.length);
-          dialog.dialogSend(recogout.shypo[0].whypo[1].classid);
+          dialog.dialogSend(recogout.shypo[0].whypo[1].classid,hello);
           for (int i = 0; i < recogout.shypo[0].whypo.length; i++) {
         	  System.out.println(recogout.shypo[0].whypo[i].word);
               //this.dialogRule(recogout.shypo[0].whypo[i].word,recogout.shypo[0].whypo[1].classid);
              // this.count(recogout.shypo[0].whypo[i].word,i);
-              
-              
+           
           }
 		} else if (doc.getDocumentElement().getTagName().equals("STARTRECOG")) {
 			System.err.println("認識開始");
@@ -73,7 +74,6 @@ public class MainManagerImpl implements MainManager {
 		if(word.equals("押せ")||word.equals("押してください")){
 			System.out.println("osetest");
 		    motion="push";
-			
 		}
 	}
 }

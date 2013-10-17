@@ -1,12 +1,12 @@
 
 public class Automaton {
- State stWait = new State("検索したいと言ってください。");
- State stSearch = new State("乗車券ですか？定期券ですか？");
- State stSearchjosha = new State("大人ですか？子供ですか？");
- State stSearchjoshachild = new State("何駅から何駅ですか？");
- State stSearchjoshaadult = new State("何駅から何駅ですか？");
- State stSearchteiki = new State("学生ですか？");
- State stSearchteikikukan = new State("区間を指定してください？");
+ State stWait = new State("検索したいと言ってください。","walk");
+ State stSearch = new State("乗車券ですか？定期券ですか？","push");
+ State stSearchjosha = new State("大人ですか？子供ですか？","しなる");
+ State stSearchjoshachild = new State("何駅から何駅ですか？","walk");
+ State stSearchjoshaadult = new State("何駅から何駅ですか？","push");
+ State stSearchteiki = new State("学生ですか？","しなる");
+ State stSearchteikikukan = new State("区間を指定してください？","push");
  State currentState = stWait;
  TransitionRule[] rules=new TransitionRule[17];
 
