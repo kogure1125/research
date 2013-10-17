@@ -13,10 +13,10 @@ import org.w3c.dom.NodeList;
 
 public class MainManagerImpl implements MainManager {
 	SpeechRecognizer sprec;
-	String motion;
+	String motion,msg;
 	DialogueManager dialog = new DialogueManagerImpl();
 	HelloAnimation hello = new HelloAnimation();
-	
+	SoundP sound = new SoundP();
 	MainManagerImpl() {
 		try {
 			sprec = new SpeechRecognizerImpl(this);
@@ -28,16 +28,16 @@ public class MainManagerImpl implements MainManager {
 	
 	public void start() {
 		sprec.start();
+		sound.start();
 		hello.start();
 	}
 
 	public void speechDetected(Document doc) {
-		
-		
+		if(sound.get()){
 		if (doc.getDocumentElement().getTagName().equals("RECOGOUT")) {
 			RecogOut recogout = new RecogOut(doc);
           System.out.println(recogout.shypo[0].whypo.length);
-          dialog.dialogSend(recogout.shypo[0].whypo[1].classid,hello);
+          dialog.senddialog(recogout.shypo[0].whypo[1].classid,hello);
           for (int i = 0; i < recogout.shypo[0].whypo.length; i++) {
         	  System.out.println(recogout.shypo[0].whypo[i].word);
               //this.dialogRule(recogout.shypo[0].whypo[i].word,recogout.shypo[0].whypo[1].classid);
@@ -47,6 +47,15 @@ public class MainManagerImpl implements MainManager {
 		} else if (doc.getDocumentElement().getTagName().equals("STARTRECOG")) {
 			System.err.println("認識開始");
 		}
+		}
+		else{
+			System.out.println("認識失敗");
+		}
+	}
+	public void Action(){
+		//msg=dialog.getmsg();
+		//motion=dialog.getmotion();
+		//hello.setValue(motion);
 	}
 	public String[] count(String id,int _i){
 	    String[] array=new String[2];
@@ -62,20 +71,6 @@ public class MainManagerImpl implements MainManager {
 		}
 	
     //動作を定義するメソッド
-	
-	
-	public void speechDistinguish (String word){
-		if(word.equals("歩いてください") || word.equals("歩け")){
-			motion="work";
-		}
-		if(word.equals("しなれ") || word.equals("しなってください")){
-            motion="しなる";
-		}
-		if(word.equals("押せ")||word.equals("押してください")){
-			System.out.println("osetest");
-		    motion="push";
-		}
-	}
 }
 
     
