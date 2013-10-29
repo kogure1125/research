@@ -1,15 +1,15 @@
 
 public class Automaton {
- State stWait = new State("検索したいと言ってください。","walk");
+ State stWait = new State("検索したいと言ってください。","しなる");
  State stSearch = new State("乗車券ですか？定期券ですか？","push");
  State stSearchjosha = new State("大人ですか？子供ですか？","しなる");
- State stSearchjoshachild = new State("何駅から何駅ですか？","walk");
- State stSearchjoshaadult = new State("何駅から何駅ですか？","push");
+ State stSearchjoshachild = new State("何駅から何駅ですか？","stop");
+ State stSearchjoshaadult = new State("何駅から何駅ですか？","stop");
  State stSearchteiki = new State("学生ですか？","しなる");
  State stSearchteikikukan = new State("区間を指定してください？","push");
  State currentState = stWait;
  TransitionRule[] rules=new TransitionRule[17];
-
+ boolean syntherule=false;
 
  Automaton(){
 	 rules[0] = new TransitionRule(stWait,0,stSearch);
@@ -34,6 +34,7 @@ public class Automaton {
 		for(TransitionRule r:rules){
 		if(currentState==r.currentState&&classid == r.classid){
 			currentState=r.nextState;
+			syntherule=true;
 		  }
 		}
     }

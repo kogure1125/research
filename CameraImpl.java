@@ -7,6 +7,7 @@ public class CameraImpl extends Thread implements Camera {
 	  String year="",month="",day="",hour="",minute="",second="",zahyouX="",zahyouY="",height="",width="";
 	  int intx;
 	  int intsecond;
+	  String[] strAry = new String[10];
 	  CameraImpl(SoundP x){
 		  this.start();
 		  sound=x;
@@ -20,7 +21,7 @@ public class CameraImpl extends Thread implements Camera {
 	  public void dosplit(String _s){
 		  String str = new String(_s);
 		  String[] strAry = str.split(",");
-			  year=strAry[0];
+/*			  year=strAry[0];
 			  month=strAry[1];
 			  day=strAry[2];
 			  hour=strAry[3];
@@ -32,19 +33,20 @@ public class CameraImpl extends Thread implements Camera {
 			  width=strAry[9];
 	          intx=Integer.parseInt(zahyouX);
 	          intsecond=Integer.parseInt(second);
-			  sound.approval(intx,intsecond);
+	          */
+			  sound.approval(strAry);
 	  }
 	  public void run(){
-		  try {
-			  while(true){
-		    int secondstart=intsecond;
-			Thread.sleep(5000);
-            sound.approval(0,secondstart);
-			  }
-		} catch (InterruptedException e) {
+		 try{
+			while(true){
+		    sound.x = false;
+			Thread.sleep(2000);
+		    }
+		    }catch(InterruptedException e){
 			// TODO 自動生成された catch ブロック
 			e.printStackTrace();
-		}
+		  }
 		  
 	  }
-	}
+	  
+ }

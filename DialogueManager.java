@@ -1,5 +1,5 @@
 
 public interface DialogueManager {
-    
-public abstract void dialogSend(int classid);
+
+public abstract void senddialog(int classid,String mozi);
 }

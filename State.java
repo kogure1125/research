@@ -1,6 +1,8 @@
 public class State{
-	String response;
-	State(String r){
+	String response,motion;
+	SearchEngine s;
+	State(String r,String m){
 		response = r;
+		motion = m;
 	}
 }

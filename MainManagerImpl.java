@@ -15,7 +15,7 @@ public class MainManagerImpl implements MainManager {
 	SpeechRecognizer sprec;
 	String motion,msg;
 	DialogueManager dialog = new DialogueManagerImpl();
-	HelloAnimation hello = new HelloAnimation();
+	//HelloAnimation hello = new HelloAnimation();
 	SoundP sound = new SoundP();
 	MainManagerImpl() {
 		try {
@@ -29,28 +29,31 @@ public class MainManagerImpl implements MainManager {
 	public void start() {
 		sprec.start();
 		sound.start();
-		hello.start();
+		//hello.start();
 	}
 
 	public void speechDetected(Document doc) {
+		System.out.println("認識失敗");
 		if(sound.get()){
 		if (doc.getDocumentElement().getTagName().equals("RECOGOUT")) {
 			RecogOut recogout = new RecogOut(doc);
           System.out.println(recogout.shypo[0].whypo.length);
-          dialog.senddialog(recogout.shypo[0].whypo[1].classid,hello);
+          
           for (int i = 0; i < recogout.shypo[0].whypo.length; i++) {
         	  System.out.println(recogout.shypo[0].whypo[i].word);
               //this.dialogRule(recogout.shypo[0].whypo[i].word,recogout.shypo[0].whypo[1].classid);
              // this.count(recogout.shypo[0].whypo[i].word,i);
            
           }
+          dialog.senddialog(recogout.shypo[0].whypo[1].classid,recogout.shypo[0].whypo[1].word);
 		} else if (doc.getDocumentElement().getTagName().equals("STARTRECOG")) {
-			System.err.println("認識開始");
-		}
+			System.err.println("認識成功");
 		}
 		else{
-			System.out.println("認識失敗");
+			System.out.println("認証失敗");
 		}
+		}
+	
 	}
 	public void Action(){
 		//msg=dialog.getmsg();
