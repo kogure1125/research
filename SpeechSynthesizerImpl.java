@@ -11,12 +11,18 @@ import java.io.*;
 public class SpeechSynthesizerImpl extends JFrame implements SpeechSynthesizer {
     
 	CMXController controller = CMXController.getInstance();
+<<<<<<< HEAD
 	String synthetest="";
 	
     public void synthesizer(String syntheValue,int volume){
     	
     }
 	public void synthesizer(String syntheValue){
+=======
+    public void synthesizer(String syntheValue){
+
+
+>>>>>>> 474e1b8472b36209e2a4fda1635762cca2964f1a
         String dic = "/usr/local/share/open_jtalk/open_jtalk_dic_utf_8-1.06";
         String voice = "/usr/local/share/hts_voice/nitech_jp_atr503_m001-1.05";
         List<String> list = new ArrayList<String>();
@@ -80,6 +86,7 @@ public class SpeechSynthesizerImpl extends JFrame implements SpeechSynthesizer {
 		String inData = "out.wav";
 		controller.wavread(inData);
 		controller.playMusic();
+<<<<<<< HEAD
 		for(int i=0;i<3;i++){
 	       	try {
 					Thread.sleep(1000);
@@ -90,6 +97,24 @@ public class SpeechSynthesizerImpl extends JFrame implements SpeechSynthesizer {
 		/*while(controller.isNowPlaying()){
 			System.out.println("aa");
 			}*/
+=======
+
+		
+		for(int i = 3;i > 0 ; i--){
+			System.out.println("do");
+         try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+			}
+/*while(controller.isNowPlaying()){
+	Thread.sleep(1000); 
+	System.out.println("do");
+		}
+	*/	
+>>>>>>> 474e1b8472b36209e2a4fda1635762cca2964f1a
 		controller.stopMusic();
 		System.out.println("stop"); 
 		//System.exit(0);

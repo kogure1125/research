@@ -1,5 +1,6 @@
 
 public class DialogueManagerImpl implements DialogueManager  {
+<<<<<<< HEAD
 	SoundP p;
 	Automaton auto=new Automaton();
 	SpeechSynthesizer speech;
@@ -20,6 +21,31 @@ public class DialogueManagerImpl implements DialogueManager  {
 	stop.settime();
 	}
 	auto.syntherule=false;
+=======
+	Automaton auto=new Automaton();
+	SpeechSynthesizer speech = new SpeechSynthesizerImpl();
+	
+	public void senddialog(int classid,String mozi) {
+	auto.transit(classid);
+	String msg = auto.currentState.response;
+	String motion = auto.currentState.motion;
+	System.out.println(msg);
+    
+	if(auto.syntherule==true){
+	speech.synthesizer(msg);
+	}
+	auto.syntherule=false;
+	}
+
+	/*public String getmsg() {
+		return msg;
+	}
+
+	@Override
+	public String getmotion() {
+		return motion;
+	}*/
+>>>>>>> 474e1b8472b36209e2a4fda1635762cca2964f1a
 	}
 	
 	public void sendcamerainfomation(boolean cameraflag) {//カメラの情報をオートマトンに送る。

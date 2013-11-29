@@ -1,5 +1,6 @@
 
 public class Automaton {
+<<<<<<< HEAD
  String word1,word2,user;
  State stWait = new NoActionState("初期状態に戻ります");
  State stSearch = new MessageState("子供ですか？大人ですか？");
@@ -11,6 +12,17 @@ public class Automaton {
  State stVolume = new VolumeState("テスト安定");
  State currentState = stWait;
  TransitionRule[] rules=new TransitionRule[12];
+=======
+ State stWait = new State("検索したいと言ってください。","しなる");
+ State stSearch = new State("乗車券ですか？定期券ですか？","push");
+ State stSearchjosha = new State("大人ですか？子供ですか？","しなる");
+ State stSearchjoshachild = new State("何駅から何駅ですか？","stop");
+ State stSearchjoshaadult = new State("何駅から何駅ですか？","stop");
+ State stSearchteiki = new State("学生ですか？","しなる");
+ State stSearchteikikukan = new State("区間を指定してください？","push");
+ State currentState = stWait;
+ TransitionRule[] rules=new TransitionRule[17];
+>>>>>>> 474e1b8472b36209e2a4fda1635762cca2964f1a
  boolean syntherule=false;
 
  Automaton(){
@@ -35,10 +47,14 @@ public class Automaton {
 		for(TransitionRule r:rules){
 		if(currentState==r.currentState&&classid == r.classid){
 			currentState=r.nextState;
+<<<<<<< HEAD
 			syntherule=true;//遷移した時のみシステムの発話を行う。
 			if(r.user=="子供"||r.user=="大人"){
 				user=r.user;
 			}
+=======
+			syntherule=true;
+>>>>>>> 474e1b8472b36209e2a4fda1635762cca2964f1a
 		  }
 		}
     }

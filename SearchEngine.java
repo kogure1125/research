@@ -1,4 +1,7 @@
+<<<<<<< HEAD
 
+=======
+>>>>>>> 474e1b8472b36209e2a4fda1635762cca2964f1a
 import java.util.HashMap;
 	
 public class SearchEngine {
@@ -92,11 +95,19 @@ public class SearchEngine {
     }else if(45 <= dataFloat && dataFloat <= 52){
     	resultAdult = 370;
     }
+<<<<<<< HEAD
     if(user.equals("大人")){
 //      System.out.println("adult" + data);
       data = Integer.toString(resultAdult);
       
     }else if(user.equals("子供")){
+=======
+    if(user.equals("adult")){
+//      System.out.println("adult" + data);
+      data = Integer.toString(resultAdult);
+      
+    }else if(user.equals("child")){
+>>>>>>> 474e1b8472b36209e2a4fda1635762cca2964f1a
     	value = (int) Math.ceil((double)resultAdult / 20) * 10;
       data = Integer.toString(value);
 //      System.out.println("child" + data);
@@ -105,4 +116,8 @@ public class SearchEngine {
 	return data;
 	
   }	
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 474e1b8472b36209e2a4fda1635762cca2964f1a
