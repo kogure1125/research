@@ -11,12 +11,17 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 
-public class MainManagerImpl implements MainManager {
+public class MainManagerImpl extends Thread implements MainManager {
 	SpeechRecognizer sprec;
 	String motion,msg;
-	DialogueManager dialog = new DialogueManagerImpl();
-	HelloAnimation hello = new HelloAnimation();
-	SoundP sound = new SoundP();
+	//HelloAnimation hello = new HelloAnimation();
+	SoundP sound = new SoundP(this);
+	SpeechSynthesizer s= new SpeechSynthesizerImpl();
+	DialogueManager dialog = new DialogueManagerImpl(s,sound);
+	boolean dialogflag=true;
+	Cameratest aa= new Cameratest(this,sound,s);
+	
+	
 	MainManagerImpl() {
 		try {
 			sprec = new SpeechRecognizerImpl(this);
@@ -29,48 +34,40 @@ public class MainManagerImpl implements MainManager {
 	public void start() {
 		sprec.start();
 		sound.start();
-		hello.start();
+		
+		//hello.start();
 	}
 
 	public void speechDetected(Document doc) {
-		if(sound.get()){
+		//if(sound.get()){
 		if (doc.getDocumentElement().getTagName().equals("RECOGOUT")) {
 			RecogOut recogout = new RecogOut(doc);
           System.out.println(recogout.shypo[0].whypo.length);
-          dialog.senddialog(recogout.shypo[0].whypo[1].classid,hello);
+          if(recogout.shypo[0].whypo.length>3){
+              dialog.Setword(recogout.shypo[0].whypo[1].word,recogout.shypo[0].whypo[3].word);
+          }
+          
           for (int i = 0; i < recogout.shypo[0].whypo.length; i++) {
         	  System.out.println(recogout.shypo[0].whypo[i].word);
               //this.dialogRule(recogout.shypo[0].whypo[i].word,recogout.shypo[0].whypo[1].classid);
              // this.count(recogout.shypo[0].whypo[i].word,i);
            
           }
+          dialog.senddialog(recogout.shypo[0].whypo[1].classid,recogout.shypo[0].whypo[1].word);
 		} else if (doc.getDocumentElement().getTagName().equals("STARTRECOG")) {
 			System.err.println("認識開始");
-		}
 		}
 		else{
 			System.out.println("認識失敗");
 		}
+		/*}
+		else{
+			System.out.println("認証失敗");
+		}*/
 	}
-	public void Action(){
-		//msg=dialog.getmsg();
-		//motion=dialog.getmotion();
-		//hello.setValue(motion);
+	public void camerarelay(boolean _cameraflag){
+		dialog.sendcamerainfomation(_cameraflag);
 	}
-	public String[] count(String id,int _i){
-	    String[] array=new String[2];
-		if(_i==1){
-         System.out.println(id+_i);
-         array[0]=id;
-		}
-		if(_i==3){
-		 System.out.println(id+_i);
-		 array[1]=id;
-		}
-		return array;
-		}
-	
-    //動作を定義するメソッド
-}
+	}
 
     
