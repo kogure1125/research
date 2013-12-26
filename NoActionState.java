@@ -4,8 +4,10 @@ public class NoActionState extends State{
 		super(r);
 	}
 
-	@Override
 	public void act() {
+		speecharray.clear();
+		speech.synthesizer(response);
+		
 	}
 	
 	

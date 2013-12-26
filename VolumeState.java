@@ -1,13 +1,14 @@
 
 public class VolumeState extends State {
-
-	VolumeState(String r) {
+   
+	float volume,changevolume;
+	VolumeState(String r,float d ) {
 		super(r);
+		volume=d;
 	}
 	@Override
 	public void act() {
-        System.out.println("テスト安定");
-        speech.synthesizer(response);
+        speech.synthesizer(response,volume);//ここを飛ばす！！！！！
 	}
 
 }
