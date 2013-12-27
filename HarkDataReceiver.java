@@ -19,8 +19,7 @@ public class HarkDataReceiver {
 
 			SampleModule sample = new SampleModule(v);
 			hdsr.setTickTimer(null);
-			
-//データはHarkDataReceiver.sample.noiseData
+
 			
 			CMXController cmx = CMXController.getInstance();
 			
@@ -48,7 +47,8 @@ class SampleModule extends SPModule {
 	float dataArray[] = new float[100];
 	int dataArrays = 0;
 	float addData = (float) 0.0;
-	int resultData = 0;
+	int rmsData = 0;    //音の振幅をRMSした結果
+	int dBData = 0;     //RMSの結果からdBを推定した結果
 	//音源定位関係変数，配列
 	double angle[] = new double [100];
 	double angleData = 0; 
@@ -111,19 +111,22 @@ class SampleModule extends SPModule {
   		  for(int ii = 0 ; ii < dataArrays ; ii++){
   			  addData = addData + dataArray[ii];
   		  }
-  		  resultData = (int) (addData / (dataArrays + 1));
+  		  rmsData = (int) (addData / (dataArrays + 1));
+          dBData = (int) (7.229990872 * Math.log(((int)(rmsData))) + 8.2334032299);
+
+  		  
  
   		  
   		  // 		  System.out.println("-result-" + (resultData));
   		  
   		  
   		  ///resultDataが騒音レベル数値
-  		  v.modulateNoise(resultData);
+  		  v.modulateNoise(rmsData,dBData);
   		  
   		  
   		  dataArrays = 0;
   		  addData = 0;
-  		  resultData = 0;
+  		  rmsData = 0;
    		}
 		}
 		  }
