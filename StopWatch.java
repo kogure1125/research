@@ -25,8 +25,9 @@ class StopWatch extends Thread{
 		if(time==3||time==10||time==20){
 		d.sendtime(time);
 		}
-		System.out.println("watch"+time);
+		System.out.println(time+"秒");
 	    if(d.auto.currentState.speech.get()==0){
+	    	System.out.println("aa");
 	 	time=0;
 	    }
 		

@@ -17,7 +17,7 @@ public class MainManagerImpl extends Thread implements MainManager {
 	//HelloAnimation hello = new HelloAnimation();
 	SoundP sound = new SoundP(this);
 	DialogueManager dialog = new DialogueManagerImpl(sound);
-	//VolumeManager VM = new VolumeManager(this);
+	VolumeManager VM = new VolumeManager(this);
 	boolean dialogflag=true;
 	
 	MainManagerImpl() {

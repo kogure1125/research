@@ -14,7 +14,6 @@ public class SearchState extends State {
 		super(r);
 	}
 	public void act(){
-		super.savelog(auto.currentState);
 		searchword=s.search("桜上水",auto.word1);//APIで検索
 		 for(int i=0;i<searchword.length-5;i=i+2){
 		 speecharray.add(searchword[i]+"駅から"+searchword[i+1]+"で"+searchword[i+2]+"駅で乗り換えてください");

@@ -4,7 +4,7 @@ public class DialogueManagerImpl implements DialogueManager  {
 	StopWatch stop=new StopWatch(this);
 	Automaton auto=new Automaton(this);
 	int classid;
-	logManagerImpl userlog = new logManagerImpl();
+	LogManagerImpl userlog = new LogManagerImpl();
 	 
 
 	DialogueManagerImpl(SoundP _p){
@@ -13,7 +13,6 @@ public class DialogueManagerImpl implements DialogueManager  {
 	
 	public void senddialog(int classid,String mozi) {
 	userlog.writeuserlog(mozi);
-	userlog.writesystemlog(auto.currentState);
 	auto.transit(classid);
 	if(auto.syntherule==true){
 	
@@ -26,20 +25,23 @@ public class DialogueManagerImpl implements DialogueManager  {
 	
 	public void sendtime(int time){
 	if(auto.transittime(time)){
-	//auto.currentState.act();
-	
-	stop.settime();
+		stop.settime();
 	}
 	}
 	
 	public void sendcamerainfomation(boolean cameraflag) {
 		//カメラの情報をオートマトンに送る。
 	if(auto.transit(cameraflag)){
-		//stop.settime();
 		auto.currentState.act();
-        //stop.settime();
 		auto.currentState=auto.stSearch;
 		auto.currentState.act();
+	}
+	}
+	public void sendcamerainfomation2(boolean cameraflag){
+	if(auto.transit(cameraflag)){
+	auto.currentState.act();
+	auto.currentState=auto.stSearch;
+	auto.currentState.act();
 	}
 	}
 	

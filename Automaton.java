@@ -6,7 +6,7 @@ public class Automaton {
  State stSearch = new MessageState("どこ駅までいきますか？");
  State stTime = new MessageState("聞こえますか？");//10秒たった時に遷移する。
  State stTimeover = new MessageState("初期状態に戻ります");//20秒たった時に遷移する。
- State stSearchconfirm = new MessageState2("までですね？",this);
+ State stSearchconfirm = new MessageState.MessageState2("までですね？",this);
  State stSearchEngine = new SearchState("",this);
  State stSearchMessage0 = new SearchMessageState("1",0,this);
  State stSearchMessage1 = new SearchMessageState("2",1,this);
@@ -32,7 +32,7 @@ public class Automaton {
 	 d=_d;
 	 rules[0] = new TransitionRule(stWait,stWait2);
 	 rules[1] = new TransitionRuleclassid(stSearch,5,stSearchconfirm);
-	 rules[2] = new TransitionRuleclassid(stSearch,0,stWait);
+	 rules[2] = new TransitionRuleclassid(stSearch,100,stWait);
 	 rules[3] = new TransitionRuleclassid(stSearch,11,stSearch);
 	 rules[4] = new TransitionRuleclassid(stSearchEngine,11,stSearchEngine);
 	 rules[5] = new TransitionRuleclassid(stVolumeconfirm,17,stVolumeUP);
@@ -102,13 +102,13 @@ public class Automaton {
  }
 
 void transit(int classid){//ユーザーの発話内容の遷移ルール
-	    if(classid==12&&currentState!=stWait){//うるさいや静かにしてなど音量を下げて欲しい場合
+	    if(classid==12&&currentState!=stWait&&currentState!=stWait2){//うるさいや静かにしてなど音量を下げて欲しい場合
 	    	previousState = currentState;
 	    	VolumeState=stVolumeDown;
 	    	this.Transitionchange(stVolumeDown, stVolumeconfirm);
 	    	classid=50;
 	    }
-	    if(classid==13&&currentState!=stWait){//聞こえないなど音量をあげて欲しい場合
+	    if(classid==13&&currentState!=stWait&&currentState!=stWait2){//聞こえないなど音量をあげて欲しい場合
 	    	previousState = currentState;
 	    	VolumeState=stVolumeUP;
 	    	this.Transitionchange(stVolumeUP, stVolumeconfirm);
